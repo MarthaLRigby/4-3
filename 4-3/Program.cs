@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,38 +8,29 @@ namespace _4_3
 {
     class Program
     {
-        enum weight
-        {
-            Abby = 135,
-            Bob = 175,
-            Charlie = 55,
-            Dawn =45
-            // I wouldn't use an enum for the weights here - enums are meant to be for situations where you
-            // have a set of values which are definitely unique - in this case, the weights are unique,
-            // but they don't have to be. Using a set of constant ints would be better - see below.
-        }
+        //no longer using an enum
         const int Abby = 135;
+        const int Bob = 175;
+        const int Charlie = 55;
+        const int Dawn =45;
+        // moved these
+        const int min = 100; 
+        const int max = 300;
         static void Main(string[] args)
         {
-            int min = 100;
-            int max = 300;
-            // These are variables that get initialised every time you run your program - instead,
-            // you should declare them as constants at the top of the file.
-            bool possible = (((int)weight.Abby + (int)weight.Bob) < max && ((int) weight.Abby +(int) weight.Bob) > min) ? true : false;
-            Console.WriteLine("{0} and {1} can ride together? {2}", weight.Abby, weight.Bob, possible);
-            possible = (((int)weight.Charlie + (int)weight.Bob) < max && ((int)weight.Charlie + (int)weight.Bob) > min) ? true : false;
-            Console.WriteLine("{0} and {1} can ride together? {2}", weight.Charlie, weight.Bob, possible);
-            possible = (((int)weight.Charlie + (int)weight.Dawn) < max && ((int)weight.Charlie + (int)weight.Dawn) > min) ? true : false;
-            Console.WriteLine("{0} and {1} can ride together? {2}", weight.Charlie, weight.Dawn, possible);
-            // You have a lot of code duplication here. It might be better if you used a small method to work out
-            // whether 2 passengers can ride together. I've put a prototype for you below - try using this to 
-            // commonise your code.
+            Console.WriteLine("Abby and Bob can ride together? {0}", CanRideTogether(Abby,Bob));
+            Console.WriteLine("Charlie and Bob can ride together? {0}", CanRideTogether(Charlie, Bob));
+            Console.WriteLine("Charlie and Dawn can ride together? {0}", CanRideTogether(Charlie, Dawn));
         }
         
         private static bool CanRideTogether(int first, int second) 
         {
-            // Put some code here!
-            return true;
+            int total = first + second;
+            if (total < max && total > min) 
+                return true;
+            else 
+                return false;
+            
         }
     }
 }
